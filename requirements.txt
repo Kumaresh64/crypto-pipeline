@@ -2,4 +2,5 @@ requests==2.31.0
 duckdb==0.10.0
 pandas==2.2.0
 dbt-duckdb==1.7.0
-apache-airflow==2.8.0
+apache-airflow==2.9.3
+colorlog==6.7.0
