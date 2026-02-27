@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Crypto Pipeline Dashboard</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0d1117; color:#e6edf3; font-family:-apple-system,sans-serif; }
+  header { background:linear-gradient(135deg,#1e3a5f,#2e75b6); padding:30px 40px; }
+  header h1 { font-size:26px; font-weight:700; }
+  header p { color:#a0b4c8; margin-top:6px; font-size:14px; }
+  .stats { display:flex; gap:20px; padding:30px 40px 0; }
+  .stat-card { background:#161b22; border:1px solid #30363d; border-radius:10px; padding:20px 28px; flex:1; }
+  .stat-card .label { color:#8b949e; font-size:12px; margin-bottom:6px; text-transform:uppercase; }
+  .stat-card .value { font-size:30px; font-weight:700; color:#2e75b6; }
+  .section { padding:30px 40px; }
+  .section h2 { font-size:17px; font-weight:600; margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid #2e75b6; }
+  table { width:100%; border-collapse:collapse; background:#161b22; border-radius:10px; overflow:hidden; }
+  th { background:#1e3a5f; padding:12px 16px; text-align:left; font-size:12px; color:#8b949e; text-transform:uppercase; }
+  td { padding:12px 16px; border-bottom:1px solid #21262d; font-size:14px; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:#1c2128; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; }
+  .badge { padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+  .gainer { background:#0d4a1e; color:#00e676; }
+  .loser  { background:#4a0d0d; color:#ff5252; }
+  .high   { background:#4a1a0d; color:#ff6d00; }
+  .medium { background:#4a3a0d; color:#ffd740; }
+  .low    { background:#0d4a1e; color:#00e676; }
+  footer { text-align:center; padding:30px; color:#8b949e; font-size:12px; border-top:1px solid #21262d; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🚀 Crypto Market Analytics Pipeline</h1>
+  <p>Real-time data · CoinGecko API · Python · DuckDB · dbt · Airflow</p>
+</header>
+
+<div class="stats">
+  <div class="stat-card">
+    <div class="label">Bronze Records</div>
+    <div class="value">150</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Silver Records</div>
+    <div class="value">150</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Coins Tracked</div>
+    <div class="value">51</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Pipeline Status</div>
+    <div class="value" style="color:#00e676">LIVE ✓</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📊 Market Cap Rankings</h2>
+  <table>
+    <thead><tr>
+      <th>Rank</th><th>Symbol</th><th>Name</th>
+      <th>Price</th><th>24h</th><th>7d</th><th>Market Cap</th>
+    </tr></thead>
+    <tbody><tr>
+            <td>#1</td>
+            <td><strong>BTC</strong></td>
+            <td>Bitcoin</td>
+            <td>$66,209.00</td>
+            <td style="color:#ff5252">▼ -2.62%</td>
+            <td style="color:#ff5252">-0.82%</td>
+            <td>$1324.02B</td>
+        </tr><tr>
+            <td>#2</td>
+            <td><strong>ETH</strong></td>
+            <td>Ethereum</td>
+            <td>$1,955.83</td>
+            <td style="color:#ff5252">▼ -5.35%</td>
+            <td style="color:#00e676">1.17%</td>
+            <td>$236.43B</td>
+        </tr><tr>
+            <td>#3</td>
+            <td><strong>USDT</strong></td>
+            <td>Tether</td>
+            <td>$1.0000</td>
+            <td style="color:#00e676">▲ 0.01%</td>
+            <td style="color:#00e676">0.04%</td>
+            <td>$183.56B</td>
+        </tr><tr>
+            <td>#4</td>
+            <td><strong>BNB</strong></td>
+            <td>BNB</td>
+            <td>$614.1100</td>
+            <td style="color:#ff5252">▼ -2.14%</td>
+            <td style="color:#00e676">0.83%</td>
+            <td>$83.76B</td>
+        </tr><tr>
+            <td>#5</td>
+            <td><strong>XRP</strong></td>
+            <td>XRP</td>
+            <td>$1.3700</td>
+            <td style="color:#ff5252">▼ -4.84%</td>
+            <td style="color:#ff5252">-2.37%</td>
+            <td>$83.69B</td>
+        </tr><tr>
+            <td>#6</td>
+            <td><strong>USDC</strong></td>
+            <td>USDC</td>
+            <td>$0.999913</td>
+            <td style="color:#ff5252">▼ -0.00%</td>
+            <td style="color:#ff5252">-0.01%</td>
+            <td>$75.21B</td>
+        </tr><tr>
+            <td>#7</td>
+            <td><strong>SOL</strong></td>
+            <td>Solana</td>
+            <td>$83.0400</td>
+            <td style="color:#ff5252">▼ -5.53%</td>
+            <td style="color:#00e676">1.15%</td>
+            <td>$47.21B</td>
+        </tr><tr>
+            <td>#8</td>
+            <td><strong>TRX</strong></td>
+            <td>TRON</td>
+            <td>$0.283952</td>
+            <td style="color:#ff5252">▼ -0.98%</td>
+            <td style="color:#ff5252">-0.33%</td>
+            <td>$26.91B</td>
+        </tr><tr>
+            <td>#9</td>
+            <td><strong>DOGE</strong></td>
+            <td>Dogecoin</td>
+            <td>$0.094627</td>
+            <td style="color:#ff5252">▼ -4.45%</td>
+            <td style="color:#ff5252">-1.63%</td>
+            <td>$15.98B</td>
+        </tr><tr>
+            <td>#10</td>
+            <td><strong>FIGR_HELOC</strong></td>
+            <td>Figure Heloc</td>
+            <td>$1.0170</td>
+            <td style="color:#ff5252">▼ -1.41%</td>
+            <td style="color:#ff5252">-1.16%</td>
+            <td>$15.69B</td>
+        </tr><tr>
+            <td>#11</td>
+            <td><strong>WBT</strong></td>
+            <td>WhiteBIT Coin</td>
+            <td>$49.3500</td>
+            <td style="color:#ff5252">▼ -2.82%</td>
+            <td style="color:#ff5252">-1.40%</td>
+            <td>$10.53B</td>
+        </tr><tr>
+            <td>#12</td>
+            <td><strong>ADA</strong></td>
+            <td>Cardano</td>
+            <td>$0.283282</td>
+            <td style="color:#ff5252">▼ -3.46%</td>
+            <td style="color:#00e676">4.26%</td>
+            <td>$10.44B</td>
+        </tr><tr>
+            <td>#13</td>
+            <td><strong>USDS</strong></td>
+            <td>USDS</td>
+            <td>$0.999918</td>
+            <td style="color:#ff5252">▼ -0.03%</td>
+            <td style="color:#ff5252">-0.00%</td>
+            <td>$9.98B</td>
+        </tr><tr>
+            <td>#14</td>
+            <td><strong>BCH</strong></td>
+            <td>Bitcoin Cash</td>
+            <td>$467.6300</td>
+            <td style="color:#ff5252">▼ -5.25%</td>
+            <td style="color:#ff5252">-14.15%</td>
+            <td>$9.35B</td>
+        </tr><tr>
+            <td>#15</td>
+            <td><strong>LEO</strong></td>
+            <td>LEO Token</td>
+            <td>$8.7800</td>
+            <td style="color:#00e676">▲ 0.46%</td>
+            <td style="color:#00e676">0.83%</td>
+            <td>$8.09B</td>
+        </tr><tr>
+            <td>#16</td>
+            <td><strong>HYPE</strong></td>
+            <td>Hyperliquid</td>
+            <td>$28.1100</td>
+            <td style="color:#ff5252">▼ -2.94%</td>
+            <td style="color:#ff5252">-2.33%</td>
+            <td>$6.71B</td>
+        </tr><tr>
+            <td>#17</td>
+            <td><strong>CC</strong></td>
+            <td>Canton</td>
+            <td>$0.172265</td>
+            <td style="color:#00e676">▲ 4.99%</td>
+            <td style="color:#00e676">8.70%</td>
+            <td>$6.54B</td>
+        </tr><tr>
+            <td>#18</td>
+            <td><strong>XMR</strong></td>
+            <td>Monero</td>
+            <td>$340.2700</td>
+            <td style="color:#ff5252">▼ -0.48%</td>
+            <td style="color:#00e676">2.80%</td>
+            <td>$6.27B</td>
+        </tr><tr>
+            <td>#19</td>
+            <td><strong>LINK</strong></td>
+            <td>Chainlink</td>
+            <td>$8.8300</td>
+            <td style="color:#ff5252">▼ -4.40%</td>
+            <td style="color:#00e676">3.95%</td>
+            <td>$6.26B</td>
+        </tr><tr>
+            <td>#20</td>
+            <td><strong>USDE</strong></td>
+            <td>Ethena USDe</td>
+            <td>$0.999312</td>
+            <td style="color:#00e676">▲ 0.01%</td>
+            <td style="color:#00e676">0.03%</td>
+            <td>$6.06B</td>
+        </tr></tbody>
+  </table>
+</div>
+
+<div class="grid">
+  <div class="section">
+    <h2>🔥 Top Movers (24h)</h2>
+    <table>
+      <thead><tr>
+        <th>Symbol</th><th>Name</th><th>Price</th><th>Change</th><th>Type</th>
+      </tr></thead>
+      <tbody><tr>
+            <td>📉 <strong>ZEC</strong></td>
+            <td>Zcash</td>
+            <td>$225.8300</td>
+            <td style="color:#ff5252">-7.47%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>📉 <strong>PEPE</strong></td>
+            <td>Pepe</td>
+            <td>$0.000004</td>
+            <td style="color:#ff5252">-6.31%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>📉 <strong>SOL</strong></td>
+            <td>Solana</td>
+            <td>$83.0400</td>
+            <td style="color:#ff5252">-5.53%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>📉 <strong>ETH</strong></td>
+            <td>Ethereum</td>
+            <td>$1,955.83</td>
+            <td style="color:#ff5252">-5.35%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>📉 <strong>BCH</strong></td>
+            <td>Bitcoin Cash</td>
+            <td>$467.6300</td>
+            <td style="color:#ff5252">-5.25%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>🚀 <strong>CC</strong></td>
+            <td>Canton</td>
+            <td>$0.172265</td>
+            <td style="color:#00e676">4.99%</td>
+            <td><span class="badge gainer">GAINER</span></td>
+        </tr><tr>
+            <td>📉 <strong>XRP</strong></td>
+            <td>XRP</td>
+            <td>$1.3700</td>
+            <td style="color:#ff5252">-4.84%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>📉 <strong>DOGE</strong></td>
+            <td>Dogecoin</td>
+            <td>$0.094627</td>
+            <td style="color:#ff5252">-4.45%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>📉 <strong>LINK</strong></td>
+            <td>Chainlink</td>
+            <td>$8.8300</td>
+            <td style="color:#ff5252">-4.40%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr><tr>
+            <td>📉 <strong>UNI</strong></td>
+            <td>Uniswap</td>
+            <td>$3.7900</td>
+            <td style="color:#ff5252">-4.07%</td>
+            <td><span class="badge loser">LOSER</span></td>
+        </tr></tbody>
+    </table>
+  </div>
+  <div class="section">
+    <h2>⚡ Volatility Scores</h2>
+    <table>
+      <thead><tr>
+        <th>Symbol</th><th>Name</th><th>Price</th><th>Volatility</th><th>Band</th>
+      </tr></thead>
+      <tbody><tr>
+            <td><strong>DOT</strong></td>
+            <td>Polkadot</td>
+            <td>$1.5700</td>
+            <td>9.15%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>AAVE</strong></td>
+            <td>Aave</td>
+            <td>$115.8700</td>
+            <td>9.09%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>ZEC</strong></td>
+            <td>Zcash</td>
+            <td>$225.8300</td>
+            <td>8.69%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>TAO</strong></td>
+            <td>Bittensor</td>
+            <td>$180.9100</td>
+            <td>7.11%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>CC</strong></td>
+            <td>Canton</td>
+            <td>$0.172265</td>
+            <td>7.09%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>SOL</strong></td>
+            <td>Solana</td>
+            <td>$83.0400</td>
+            <td>6.96%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>HYPE</strong></td>
+            <td>Hyperliquid</td>
+            <td>$28.1100</td>
+            <td>6.77%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>BCH</strong></td>
+            <td>Bitcoin Cash</td>
+            <td>$467.6300</td>
+            <td>6.55%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>ETH</strong></td>
+            <td>Ethereum</td>
+            <td>$1,955.83</td>
+            <td>6.16%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr><tr>
+            <td><strong>SUI</strong></td>
+            <td>Sui</td>
+            <td>$0.911705</td>
+            <td>5.91%</td>
+            <td><span class="badge medium">MEDIUM</span></td>
+        </tr></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>Crypto Market Analytics Pipeline · github.com/Kumaresh64/crypto-pipeline · Kumaresh 2026</footer>
+</body>
+</html>
