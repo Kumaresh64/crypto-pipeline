@@ -1,10 +1,10 @@
-# 🚀 Crypto Market Analytics Pipeline
+#  Crypto Market Analytics Pipeline
 
 An end-to-end data engineering pipeline that ingests real-time cryptocurrency market data, transforms it through a medallion architecture, and orchestrates everything automatically with Apache Airflow.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 ```
 CoinGecko API
       ↓
@@ -17,7 +17,7 @@ dbt (Silver → Gold transformations)
 Analytics-Ready Tables
 ```
 
-## 📊 Data Models
+## Data Models
 
 | Layer | Model | Description |
 |-------|-------|-------------|
@@ -29,7 +29,7 @@ Analytics-Ready Tables
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Tool | Purpose |
 |------|---------|
@@ -42,7 +42,7 @@ Analytics-Ready Tables
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```
 crypto-pipeline/
 │
@@ -67,7 +67,7 @@ crypto-pipeline/
 
 ---
 
-## ⚙️ Setup & Run Locally
+##  Setup & Run Locally
 
 ### 1. Clone the repo
 ```bash
@@ -139,7 +139,7 @@ solana   | SOL    | 142.50            | +8.75%         | HIGH
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] Add Docker & docker-compose for full containerisation
 - [ ] Add Great Expectations for data quality checks
@@ -149,7 +149,7 @@ solana   | SOL    | 142.50            | +8.75%         | HIGH
 
 ---
 
-## 👤 Author
+## Author
 
 **Kumaresh**
 - GitHub: [@Kumaresh64](https://github.com/Kumaresh64)
