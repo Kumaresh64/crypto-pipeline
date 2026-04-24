@@ -21,11 +21,11 @@ Analytics-Ready Tables
 
 | Layer | Model | Description |
 |-------|-------|-------------|
-| 🥉 Bronze | `bronze_crypto_prices` | Raw API response landed as-is |
-| 🥈 Silver | `silver_crypto_prices` | Cleaned, typed, deduplicated |
-| 🥇 Gold | `gold_market_cap_rankings` | Top 50 coins ranked by market cap |
-| 🥇 Gold | `gold_top_movers` | Biggest 24h gainers & losers |
-| 🥇 Gold | `gold_volatility_scores` | Volatility scores & bands per coin |
+|  Bronze | `bronze_crypto_prices` | Raw API response landed as-is |
+|  Silver | `silver_crypto_prices` | Cleaned, typed, deduplicated |
+|  Gold | `gold_market_cap_rankings` | Top 50 coins ranked by market cap |
+|  Gold | `gold_top_movers` | Biggest 24h gainers & losers |
+|  Gold | `gold_volatility_scores` | Volatility scores & bands per coin |
 
 ---
 
@@ -115,7 +115,7 @@ airflow standalone
 
 ---
 
-## 🔄 Pipeline Flow
+##  Pipeline Flow
 
 The Airflow DAG runs **every hour** and executes these tasks in order:
 ```
@@ -128,7 +128,7 @@ The Airflow DAG runs **every hour** and executes these tasks in order:
 
 ---
 
-## 📈 Sample Data
+##  Sample Data
 ```
 coin_id  | symbol | current_price_usd | pct_change_24h | volatility_band
 ---------+--------+-------------------+----------------+----------------
